@@ -1,9 +1,11 @@
-# Rust Docker
+# Java Docker
 
 ## Build and test
-- `docker build -t rust-stakeholder .`
-- `docker run --rm rust-stakeholder --list-values`
+- `docker build -t java-stakeholder .`
+- `docker run --rm java-stakeholder --list-values`
 
 ## Rationale
-- The image compiles and tests the Rust baseline before packaging the runtime binary.
-- Docker is the reproducible Linux gate; host and CI matrices still cover native OS behavior.
+- The host environment may not provide Java 25.
+- The Docker image uses Java 25 end to end so the build, tests, and packaged runtime match the repo contract.
+- The image passes `--enable-native-access=ALL-UNNAMED` explicitly so Jansi works on Java 25 without default runtime warning noise.
+- The build stage runs the full Java gate: `spotless:check`, `checkstyle:check`, `spotbugs:check`, `test`, and `package`.

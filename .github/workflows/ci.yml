@@ -13,21 +13,26 @@ jobs:
         os: [ubuntu-latest, macos-latest, windows-latest]
     steps:
       - uses: actions/checkout@v4
-      - uses: dtolnay/rust-toolchain@stable
+      - uses: actions/setup-java@v4
         with:
-          components: rustfmt, clippy
-      - name: Format
-        run: cargo fmt --check
-      - name: Lint
-        run: cargo clippy -- -D warnings
-      - name: Test
-        run: cargo test
+          distribution: temurin
+          java-version: '25'
+          cache: maven
+      - name: Prepare wrapper
+        shell: bash
+        run: chmod +x mvnw
+      - name: Style and static checks
+        shell: bash
+        run: ./mvnw -q spotless:check checkstyle:check spotbugs:check
+      - name: Test and package
+        shell: bash
+        run: ./mvnw -q test package
 
   docker:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
       - name: Build image
-        run: docker build -t rust-stakeholder .
+        run: docker build -t java-stakeholder .
       - name: Smoke test
-        run: docker run --rm rust-stakeholder --list-values
+        run: docker run --rm java-stakeholder --list-values

@@ -1,5 +1,5 @@
-# Rust Language Specialties
+# Java Language Specialties
 
-- Rust is the canonical scheduler and generator baseline.
-- Shared domain concepts are modeled explicitly so follower languages can port stable semantics instead of re-deriving them.
-- Rust remains the reference for deterministic seeded behavior and normalized JSON semantics.
+- Java uses Picocli, JAnsi, and Maven to mirror the Rust baseline in a Java 25 environment.
+- The Java runtime is intentionally structured around explicit scheduler logic and normalized events so parity drift stays visible.
+- Docker is the primary local path when the host does not provide Java 25.

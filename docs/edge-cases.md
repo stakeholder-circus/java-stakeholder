@@ -1,6 +1,6 @@
-# Rust Edge Cases
+# Java Edge Cases
 
-- Seeded JSON runs must remain deterministic.
-- `alerts` and `team` act as injections into the scheduler, not alternate modes.
-- Healthcare, charging, protocol, and quantum families should only enter plans when dev type or keyword routing makes them eligible.
-- Experimental live-provider concepts must not affect default deterministic output.
+- Host JDKs older than 25 are unsupported for the native Maven path; use Docker instead.
+- Deterministic JSON output must remain stable under seed even while the runtime expands.
+- Feature gaps should fail explicitly and be tracked in `GAPS.md`.
+- Experimental provider hooks must not leak into default parity output.

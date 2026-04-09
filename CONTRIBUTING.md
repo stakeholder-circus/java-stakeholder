@@ -1,19 +1,20 @@
-# Contributing to rust-stakeholder
+# Contributing to java-stakeholder
 
 ## Rules
-- Treat Rust as the source-of-truth baseline for downstream ports.
+- Java tracks the Rust source baseline and `stakeholder-core` contract.
 - Use Conventional Commits.
-- Do not land silent behavioral changes; update `stakeholder-core` traceability and docs in the same tranche.
-- Keep deterministic seeded behavior stable unless the change is explicitly documented as a baseline evolution.
+- Do not paper over missing parity; keep feature-level gaps explicit.
+- Keep deterministic JSON behavior stable when a seed is supplied.
 
 ## Local workflow
-- `cargo fmt`
-- `cargo clippy -- -D warnings`
-- `cargo test`
-- `docker build -t rust-stakeholder .`
-- `docker run --rm rust-stakeholder --list-values`
+- `./mvnw -q spotless:check`
+- `./mvnw -q checkstyle:check`
+- `./mvnw -q spotbugs:check`
+- `./mvnw -q test package`
+- `docker build -t java-stakeholder .`
+- `docker run --rm java-stakeholder --list-values`
 
 ## Change discipline
-- Generator-family additions must update docs, examples, and fixtures.
-- Experimental provider work must stay clearly separated from deterministic parity paths.
-- Prefer additive event-schema evolution over breaking changes.
+- Runtime/scheduler changes should be reconciled against Rust and `stakeholder-core` in the same tranche.
+- Experimental provider hooks must remain outside deterministic parity CI.
+- Prefer explicit gap ids over TODO comments or silent fallbacks.

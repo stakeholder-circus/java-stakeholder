@@ -1,5 +1,5 @@
-# Rust Experimental Surface
+# Java Experimental Surface
 
-- Live-provider concepts are modeled separately from the deterministic baseline.
-- OpenAI-compatible APIs, Anthropic APIs, and consumer-account adapters remain documentation and interface work until explicitly wired into a guarded runtime path.
-- Experimental additions must not change seeded parity fixtures by default.
+- Live-provider support is planned as an explicitly experimental layer on top of the deterministic Java baseline.
+- Provider adapters and prompt/version caching must stay separated from the default CLI contract unless an experimental flag is added and documented.
+- Experimental integrations are excluded from baseline parity CI.

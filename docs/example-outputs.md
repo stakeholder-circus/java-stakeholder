@@ -1,16 +1,26 @@
-# Rust Example Outputs
+# Java Example Outputs
 
-## Security
+## Enumerate contract values
 ```bash
-cargo run -- --dev-type security --jargon high --complexity extreme --alerts --seed 42
+docker run --rm java-stakeholder --list-values
 ```
 
-## Blockchain
+## Security-focused run
 ```bash
-cargo run -- --dev-type blockchain --framework "rollup-mcp-gateway" --output-format json --seed 7
+docker run --rm java-stakeholder --dev-type security --jargon high --complexity extreme --alerts --seed 42
 ```
 
-## Healthcare + charging + quantum crossover
+## Mixed protocol run
 ```bash
-cargo run -- --project "hospital-ocpp-quantum-control" --framework "mcp grpc" --jargon extreme --team --trace --seed 11
+docker run --rm java-stakeholder --project "hospital-ocpp-quantum-control" --framework "mcp grpc" --output-format json --seed 11
+```
+
+## AI governance run
+```bash
+docker run --rm java-stakeholder --dev-type data-science --project "retrieval-governance-hub" --output-format json --seed 23
+```
+
+## Overlay and quantum run
+```bash
+docker run --rm java-stakeholder --dev-type security --project "quantum-red-team-lab" --framework "qir mcp" --output-format json --seed 31
 ```

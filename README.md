@@ -1,34 +1,37 @@
-# rust-stakeholder
+> [!IMPORTANT]
+> This repository is part of a Codex-assisted rewrite experiment. All changes are manually reviewed, a human remains in the loop, and missing behavior is tracked explicitly rather than hidden. The project exists for fun, research, language learning, AI agent workflow/planning, interop experiments, and code review testing.
+# java-stakeholder
 
-Satirical CLI output generator, now serving as the 2026+ source baseline for the multi-language `stakeholder` rewrite program.
+Java port of `rust-stakeholder`, rebased onto the expanded 2026+ source baseline.
 
 ## Status
-- Rust is the source-of-truth implementation.
-- The runtime is now scheduler-driven and deterministic under seed.
-- The baseline includes modern generator families for agents, AI operations, blockchain, healthcare, EV charging, protocol ecosystems, multilingual security flavor packs, and quantum-themed infrastructure work.
-- Experimental live-provider concepts exist in the design, but deterministic parity behavior remains the default path.
+- Java foundation slices are landed:
+  - CLI/config/domain
+  - deterministic JSON event output
+- The current tranche has landed the registry-backed scheduler/runtime foundation and dedicated family-depth renderers across classic-six, modern-core, ai-governance, security-blockchain, health-protocol, and overlay-quantum.
+- The Dockerized Java 25 build now passes with tests and packages a runnable image.
+- Java remains the depth anchor for follower parity while `.NET`, Go, Python, and Swift widen from foundation parity, and `javascript-stakeholder` stays the reference sidecar for provider and web-terminal behavior.
 
 ## Command contract
-- `cargo fmt`
-- `cargo clippy -- -D warnings`
-- `cargo build`
-- `cargo test`
-- `docker build -t rust-stakeholder .`
-- `docker run --rm rust-stakeholder --list-values`
+- `./mvnw -q test`
+- `./mvnw -q package`
+- `./mvnw -q spotless:check`
+- `./mvnw -q checkstyle:check`
+- `./mvnw -q spotbugs:check`
+- `docker build -t java-stakeholder .`
+- `docker run --rm java-stakeholder --list-values`
+
+## Java 25 note
+- The repo enforces Java 25 through Maven Enforcer.
+- If the host does not provide Java 25, use the Docker path instead of weakening the gate.
 
 ## Example usage
 ```bash
-cargo run -- --dev-type security --jargon high --complexity extreme --alerts --seed 42
-cargo run -- --dev-type blockchain --framework "rollup-mcp-gateway" --output-format json --seed 7
-cargo run -- --project "hospital-ocpp-quantum-control" --jargon extreme --team --trace --seed 11
+docker run --rm java-stakeholder --list-values
+docker run --rm java-stakeholder --dev-type security --jargon high --complexity extreme --alerts --seed 42
+docker run --rm java-stakeholder --project "hospital-ocpp-quantum-control" --framework "mcp grpc" --output-format json --seed 11
+docker run --rm java-stakeholder --dev-type data-science --project "retrieval-governance-hub" --output-format json --seed 23
 ```
-
-## What changed in the 2026+ baseline
-- classic families were modernized instead of left as legacy parody strings
-- activity planning now uses typed family selection instead of a fixed loop
-- keyword routing brings in healthcare, charging, protocol, and quantum families where relevant
-- security runs can layer multilingual language packs and persona overlays
-- JSON output is deterministic and snapshot-friendly when a seed is supplied
 
 ## Docs
 - [Tooling](docs/tooling.md)
@@ -40,4 +43,4 @@ cargo run -- --project "hospital-ocpp-quantum-control" --jargon extreme --team -
 - [Traceability](docs/traceability/README.md)
 
 ## Contributing
-See [CONTRIBUTING.md](CONTRIBUTING.md). Use Conventional Commits and keep Rust behavior traceable because downstream repos depend on this baseline.
+See [CONTRIBUTING.md](CONTRIBUTING.md). Use Conventional Commits and keep Java behavior aligned to Rust + `stakeholder-core`.
