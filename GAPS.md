@@ -4,9 +4,11 @@
 # Java Gaps
 
 ## Current explicit gaps
-- `java.experimental.live-provider-hooks-pending`: provider adapters, encrypted prompt/cache state, and consumer-account adapters are designed but not implemented in the runtime yet.
+- `java.experimental.browser-bootstrap-externalized`: consumer-session capture is implemented through an external bootstrap command configured via `STAKEHOLDER_BROWSER_BOOTSTRAP_CMD`; Java does not embed browser automation directly.
+- `java.experimental.live-provider-tests-opt-in`: live provider tests remain opt-in and require local credentials or imported session material.
 
 ## Closed in this tranche
+- `java.experimental.live-provider-hooks-pending`: provider profiles, prompt assets and versions, personalization profiles, encrypted local material handling, cache/provenance persistence, consumer-session replay adapters, and an opt-in live integration harness are now implemented in the Java runtime.
 - `java.runtime.generator-parity-pending`: replaced by the scheduler-driven runtime, deterministic JSON activity emission, family routing, keyword-based protocol selection, and security flavor overlays.
 - `java.maven-wrapper-pending`: Maven Wrapper and the full Java 25 Docker/plugin gate are now in place.
 - `java.classic-six-depth-pending`: dedicated renderer depth, richer deterministic messages, and traceability rows are now in place for `code_analyzer`, `data_processing`, `jargon`, `metrics`, `network_activity`, and `system_monitoring`.

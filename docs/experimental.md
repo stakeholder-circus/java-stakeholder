@@ -1,5 +1,27 @@
 # Java Experimental Surface
 
-- Live-provider support is planned as an explicitly experimental layer on top of the deterministic Java baseline.
-- Provider adapters and prompt/version caching must stay separated from the default CLI contract unless an experimental flag is added and documented.
-- Experimental integrations are excluded from baseline parity CI.
+- Live-provider support is implemented as an explicitly experimental layer on top of the deterministic Java baseline.
+- Supported provider paths:
+  - `local-demo`
+  - `openai-compatible`
+  - `anthropic`
+  - `consumer-session`
+  - `openai-consumer`
+  - `claude-consumer`
+- The runtime now manages:
+  - encrypted provider profiles
+  - prompt assets and prompt versions
+  - personalization profiles
+  - encrypted consumer-session material
+  - cache entries and provenance snapshots
+- Consumer-session flows support:
+  - JSON import from `--experimental-session-file`
+  - local replay through a request template
+  - opt-in browser bootstrap through `STAKEHOLDER_BROWSER_BOOTSTRAP_CMD`
+- Important environment variables:
+  - `STAKEHOLDER_ENCRYPTION_KEY`
+  - `OPENAI_API_KEY`
+  - `ANTHROPIC_API_KEY`
+  - `STAKEHOLDER_BROWSER_BOOTSTRAP_CMD`
+- Provider adapters and prompt/version caching stay separated from the default CLI contract and only activate when experimental flags are supplied.
+- Experimental integrations remain excluded from deterministic parity CI; live-provider tests are opt-in and secret-gated.

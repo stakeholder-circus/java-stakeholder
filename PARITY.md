@@ -2,7 +2,7 @@
 
 ## Role
 
-Depth anchor under stakeholder-circus; authoritative Java implementation for parity follow-on work.
+Depth anchor under stakeholder-circus; authoritative Java implementation for parity follow-on work and a co-equal experimental provider runtime alongside `javascript-stakeholder`.
 
 ## Parity class
 
@@ -15,6 +15,7 @@ Depth anchor under stakeholder-circus; authoritative Java implementation for par
 - Human in the loop
 - Derived from giacomo-b/rust-stakeholder where applicable
 - Missing behavior must fail fast and be recorded explicitly in GAPS.md
+- Deterministic parity and experimental live-provider paths remain explicitly separated
 
 ## Attribution model
 
