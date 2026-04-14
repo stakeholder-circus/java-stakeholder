@@ -10,8 +10,8 @@ Java port of `rust-stakeholder`, rebased onto the expanded 2026+ source baseline
   - deterministic JSON event output
 - The current tranche has landed the registry-backed scheduler/runtime foundation and dedicated family-depth renderers across classic-six, modern-core, ai-governance, security-blockchain, health-protocol, and overlay-quantum.
 - The Dockerized Java 25 build now passes with tests and packages a runnable image.
-- Java is no longer frozen: it now owns a JVM-native experimental provider runtime alongside `javascript-stakeholder`, while still preserving the deterministic depth-anchor baseline.
-- JavaScript remains strongest on browser/session/UI flows; Java now mirrors the same canonical experimental shapes for profiles, prompt assets, personalization, cache/provenance, consumer-session replay, and opt-in live provider runs.
+- Java is actively expanding toward full live-provider parity: it already carries a JVM-native provider runtime alongside `javascript-stakeholder`, but the lane remains opt-in and still has explicit hardening gaps.
+- JavaScript remains strongest on browser/session/UI flows; Java mirrors the same canonical experimental shapes for profiles, prompt assets, personalization, cache/provenance, consumer-session replay, and opt-in live provider runs.
 
 ## Command contract
 - `./mvnw -q test`

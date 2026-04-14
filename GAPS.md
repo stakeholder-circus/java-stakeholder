@@ -3,6 +3,8 @@
 
 # Java Gaps
 
+The items below are the remaining gaps on the path from the current Java provider runtime to the workspace-wide full live-provider target.
+
 ## Current explicit gaps
 - `java.experimental.browser-bootstrap-externalized`: consumer-session capture is implemented through an external bootstrap command configured via `STAKEHOLDER_BROWSER_BOOTSTRAP_CMD`; Java does not embed browser automation directly.
 - `java.experimental.live-provider-tests-opt-in`: live provider tests remain opt-in and require local credentials or imported session material.

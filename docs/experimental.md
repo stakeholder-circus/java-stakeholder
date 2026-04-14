@@ -1,6 +1,7 @@
 # Java Experimental Surface
 
-- Live-provider support is implemented as an explicitly experimental layer on top of the deterministic Java baseline.
+- Java's live-provider surface is the current JVM lane toward the broader full-live-provider target for every language.
+- Live-provider support remains an explicitly opt-in layer on top of the deterministic Java baseline.
 - Supported provider paths:
   - `local-demo`
   - `openai-compatible`
@@ -24,4 +25,4 @@
   - `ANTHROPIC_API_KEY`
   - `STAKEHOLDER_BROWSER_BOOTSTRAP_CMD`
 - Provider adapters and prompt/version caching stay separated from the default CLI contract and only activate when experimental flags are supplied.
-- Experimental integrations remain excluded from deterministic parity CI; live-provider tests are opt-in and secret-gated.
+- Experimental integrations remain excluded from deterministic parity CI; live-provider tests are opt-in and secret-gated while this lane is hardened.

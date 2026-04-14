@@ -2,7 +2,7 @@
 
 ## Role
 
-Depth anchor under stakeholder-circus; authoritative Java implementation for parity follow-on work and a co-equal experimental provider runtime alongside `javascript-stakeholder`.
+Depth anchor under stakeholder-circus; authoritative Java implementation for parity follow-on work and one of the active live-provider runtime lanes. Java remains co-equal with `javascript-stakeholder` for provider-runtime work, while the broader program target is that every language eventually reaches the same full live-provider surface.
 
 ## Parity class
 
