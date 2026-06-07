@@ -7,7 +7,11 @@ import com.stakeholder.config.DevelopmentType;
 import com.stakeholder.config.JargonLevel;
 import com.stakeholder.config.OutputFormat;
 import com.stakeholder.config.SessionConfig;
+import com.stakeholder.experimental.ExperimentalDefaults;
+import com.stakeholder.experimental.ExperimentalRequest;
+import com.stakeholder.experimental.ExperimentalRuntime;
 import com.stakeholder.output.JsonOutput;
+import java.nio.file.Path;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,6 +118,47 @@ public final class Main implements Callable<Integer> {
             description = "List accepted enum values as JSON")
     private boolean listValues;
 
+    @Option(
+            names = {"--experimental-provider"},
+            description = "Experimental provider id or provider family")
+    private String experimentalProvider;
+
+    @Option(
+            names = {"--experimental-profile"},
+            description = "Experimental provider profile id")
+    private String experimentalProfile;
+
+    @Option(
+            names = {"--experimental-prompt"},
+            description = "Experimental prompt asset id")
+    private String experimentalPrompt;
+
+    @Option(
+            names = {"--experimental-model"},
+            description = "Experimental provider model override")
+    private String experimentalModel;
+
+    @Option(
+            names = {"--experimental-personalization"},
+            description = "Experimental personalization profile id")
+    private String experimentalPersonalization;
+
+    @Option(
+            names = {"--experimental-adapter-mode"},
+            description = "Experimental adapter mode: api or consumer")
+    private String experimentalAdapterMode;
+
+    @Option(
+            names = {"--experimental-session-file"},
+            description = "Path to consumer-session material JSON for experimental mode")
+    private Path experimentalSessionFile;
+
+    @Option(
+            names = {"--experimental-bootstrap-session"},
+            defaultValue = "false",
+            description = "Use the configured browser bootstrap command to capture consumer-session material")
+    private boolean experimentalBootstrapSession;
+
     public static void main(String[] args) {
         AnsiConsole.systemInstall();
         int exitCode = new CommandLine(new Main()).execute(args);
@@ -142,6 +187,54 @@ public final class Main implements Callable<Integer> {
                 outputFormat,
                 noColor,
                 trace);
+        if (experimentalRequested()) {
+            if (experimentalProvider == null || experimentalProvider.isBlank()) {
+                System.err.println("Experimental mode requires --experimental-provider.");
+                return 2;
+            }
+            try {
+                ExperimentalRuntime runtime = new ExperimentalRuntime();
+                Map<String, Object> payload = runtime.run(
+                        config,
+                        new ExperimentalRequest(
+                                experimentalProvider,
+                                experimentalProfile,
+                                experimentalPrompt,
+                                experimentalModel,
+                                experimentalPersonalization,
+                                experimentalAdapterMode,
+                                experimentalSessionFile,
+                                experimentalBootstrapSession));
+                if (outputFormat == OutputFormat.JSON) {
+                    JsonOutput.writeObject(AnsiConsole.out(), payload);
+                } else {
+                    String text = String.valueOf(payload.getOrDefault("text", ""));
+                    if (!text.isBlank()) {
+                        AnsiConsole.out().println(text);
+                    }
+                    if (trace) {
+                        @SuppressWarnings("unchecked")
+                        Map<String, Object> provenance = (Map<String, Object>) payload.get("provenance");
+                        @SuppressWarnings("unchecked")
+                        Map<String, Object> cache = (Map<String, Object>) payload.get("cache");
+                        AnsiConsole.out()
+                                .println("[experimental provider="
+                                        + payload.get("provider")
+                                        + " model="
+                                        + payload.get("model")
+                                        + " cache="
+                                        + (cache == null ? "unknown" : cache.get("hit"))
+                                        + " promptVersion="
+                                        + (provenance == null ? "unknown" : provenance.get("promptVersion"))
+                                        + "]");
+                    }
+                }
+                return 0;
+            } catch (Exception exception) {
+                System.err.println("experimental provider runtime failed: " + exception.getMessage());
+                return 2;
+            }
+        }
         return Activities.simulate(config);
     }
 
@@ -155,11 +248,30 @@ public final class Main implements Callable<Integer> {
         values.put(
                 "flags",
                 List.of("alerts", "minimal", "team", "seed", "output-format", "no-color", "trace", "list-values"));
+        values.put("experimentalProviders", ExperimentalDefaults.availableProviderIds());
+        values.put("experimentalPromptAssets", ExperimentalDefaults.availablePromptAssetIds());
+        values.put("experimentalPersonalizationProfiles", ExperimentalDefaults.availablePersonalizationProfileIds());
+        values.put("experimentalFlags", ExperimentalDefaults.availableFlagNames());
         return values;
     }
 
     private static <T extends CliValue> List<String> enumValues(T[] values) {
         return java.util.Arrays.stream(values).map(CliValue::cliValue).toList();
+    }
+
+    private boolean experimentalRequested() {
+        return isSet(experimentalProvider)
+                || isSet(experimentalProfile)
+                || isSet(experimentalPrompt)
+                || isSet(experimentalModel)
+                || isSet(experimentalPersonalization)
+                || isSet(experimentalAdapterMode)
+                || experimentalSessionFile != null
+                || experimentalBootstrapSession;
+    }
+
+    private static boolean isSet(String value) {
+        return value != null && !value.isBlank();
     }
 
     private static final class DevelopmentTypeConverter implements ITypeConverter<DevelopmentType> {
