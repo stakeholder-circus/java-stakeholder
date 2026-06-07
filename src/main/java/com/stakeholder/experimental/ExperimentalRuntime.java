@@ -533,7 +533,7 @@ public final class ExperimentalRuntime {
     private static List<String> shellCommand(String command) {
         String osName = System.getProperty("os.name", "").toLowerCase(Locale.ROOT);
         if (osName.contains("win")) {
-            return List.of("bash", "-lc", command);
+            return List.of("bash", "-lc", command.replace("\\", "/"));
         }
         return List.of("/bin/sh", "-lc", command);
     }
