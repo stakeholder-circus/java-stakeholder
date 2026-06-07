@@ -529,6 +529,14 @@ public final class ExperimentalRuntime {
         return cursor.toString();
     }
 
+    private static List<String> shellCommand(String command) {
+        String osName = System.getProperty("os.name", "").toLowerCase(Locale.ROOT);
+        if (osName.contains("win")) {
+            return List.of("bash", "-lc", command);
+        }
+        return List.of("/bin/sh", "-lc", command);
+    }
+
     private String stringValue(Object value) {
         return value == null ? null : String.valueOf(value);
     }
