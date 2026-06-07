@@ -177,16 +177,12 @@ final class ExperimentalRuntimeTest {
     void bootstrapCommandCanCaptureConsumerSessionMaterial() throws Exception {
         try (ContractServer server =
                 ContractServer.json(200, "{\"result\":{\"text\":\"bootstrap-session-response\"}}")) {
-            Path script = tempDir.resolve("bootstrap-session.sh");
-            String scriptContent = """
-                    #!/bin/sh
-                    printf '%%s' '{"requestTemplate":{"method":"POST","url":"%s","headers":{"Content-Type":"application/json"},"bodyTemplate":"{\\"prompt\\":\\"${prompt}\\"}","responsePath":"result.text"},"cookies":{"session":"bootstrap-cookie"}}'
-                    """.formatted(server.url());
-            Files.writeString(script, scriptContent, StandardCharsets.UTF_8);
-            script.toFile().setExecutable(true);
+            String bootstrapCommand =
+                    "printf '%s' '{\"requestTemplate\":{\"method\":\"POST\",\"url\":\"%s\",\"headers\":{\"Content-Type\":\"application/json\"},\"bodyTemplate\":\"{\\\"prompt\\\":\\\"${prompt}\\\"}\",\"responsePath\":\"result.text\"},\"cookies\":{\"session\":\"bootstrap-cookie\"}}'"
+                            .formatted(server.url());
 
             ExperimentalRuntime runtime =
-                    new ExperimentalRuntime(tempDir, HttpClient.newHttpClient(), script.toString());
+                    new ExperimentalRuntime(tempDir, HttpClient.newHttpClient(), bootstrapCommand);
             Map<String, Object> output = runtime.run(
                     config(),
                     new ExperimentalRequest(
