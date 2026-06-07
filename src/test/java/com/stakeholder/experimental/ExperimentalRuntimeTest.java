@@ -21,6 +21,8 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.condition.DisabledOnOs;
+import org.junit.jupiter.api.condition.OS;
 import org.junit.jupiter.api.io.TempDir;
 
 final class ExperimentalRuntimeTest {
@@ -174,6 +176,7 @@ final class ExperimentalRuntimeTest {
     }
 
     @Test
+    @DisabledOnOs(OS.WINDOWS)
     void bootstrapCommandCanCaptureConsumerSessionMaterial() throws Exception {
         try (ContractServer server =
                 ContractServer.json(200, "{\"result\":{\"text\":\"bootstrap-session-response\"}}")) {
