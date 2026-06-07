@@ -116,7 +116,7 @@ public final class Activities {
         return 0;
     }
 
-    static List<NormalizedEvent> buildEvents(SessionConfig config) {
+    public static List<NormalizedEvent> buildEvents(SessionConfig config) {
         Random random = newRandom(config.seed());
         List<ActivitySelection> plan = buildActivityPlan(config, random);
         return buildEvents(config, plan);
