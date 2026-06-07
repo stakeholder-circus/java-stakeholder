@@ -321,7 +321,7 @@ public final class ExperimentalRuntime {
             throw new IOException("Set " + ExperimentalDefaults.BOOTSTRAP_ENV
                     + " to an external browser bootstrap command before using --experimental-bootstrap-session.");
         }
-        ProcessBuilder processBuilder = new ProcessBuilder("/bin/sh", "-lc", bootstrapCommand);
+        ProcessBuilder processBuilder = new ProcessBuilder(shellCommand(bootstrapCommand));
         processBuilder
                 .environment()
                 .put("STAKEHOLDER_CAPTURE_URL", profile.captureUrl() == null ? "" : profile.captureUrl());
