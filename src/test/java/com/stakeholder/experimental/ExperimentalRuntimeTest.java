@@ -178,7 +178,7 @@ final class ExperimentalRuntimeTest {
         try (ContractServer server =
                 ContractServer.json(200, "{\"result\":{\"text\":\"bootstrap-session-response\"}}")) {
             String bootstrapCommand =
-                    "printf '%s' '{\"requestTemplate\":{\"method\":\"POST\",\"url\":\"%s\",\"headers\":{\"Content-Type\":\"application/json\"},\"bodyTemplate\":\"{\\\"prompt\\\":\\\"${prompt}\\\"}\",\"responsePath\":\"result.text\"},\"cookies\":{\"session\":\"bootstrap-cookie\"}}'"
+                    "printf '%%s' '{\"requestTemplate\":{\"method\":\"POST\",\"url\":\"%s\",\"headers\":{\"Content-Type\":\"application/json\"},\"bodyTemplate\":\"{\\\"prompt\\\":\\\"${prompt}\\\"}\",\"responsePath\":\"result.text\"},\"cookies\":{\"session\":\"bootstrap-cookie\"}}'"
                             .formatted(server.url());
 
             ExperimentalRuntime runtime =
