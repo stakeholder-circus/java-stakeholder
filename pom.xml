@@ -14,7 +14,7 @@
     <spotless.version>2.46.1</spotless.version>
     <spotbugs.version>4.8.6.6</spotbugs.version>
     <checkstyle.version>10.21.1</checkstyle.version>
-    <jacoco.version>0.8.14</jacoco.version>
+    <jacoco.version>0.8.15</jacoco.version>
   </properties>
 
   <dependencies>
